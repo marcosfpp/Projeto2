@@ -1,7 +1,7 @@
 
 package academia;
 
-c class Pagamentos {
+public class Pagamentos {
      private int idPagamento; // Identificador único do pagamento
     private String dataPagamento;  // Data em que o pagamento foi realizado
     private double valorPagamento; // Valor do pagamento 
@@ -24,5 +24,16 @@ c class Pagamentos {
     public String getDataPagamentio() {
         return dataPagamento;
     }
-    public void
-}
+    public void setDataPagamento(String dataPagamento) {
+        this.dataPagamento = dataPagamento;
+    }
+    public double getValorPagamento(double valorPagamento) {
+        return valorPagamento;
+    }
+    public void setValorPagamento(double valorPagamento){
+        this.valorPagamento = valorPagamento;
+    }
+    
+    
+    
+        }
