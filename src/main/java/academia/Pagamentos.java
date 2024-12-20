@@ -16,4 +16,13 @@ c class Pagamentos {
         this.formaPagamento = formaPagamento;
         this.idAluno = idAluno;
     }
+    
+    // Getters e Setters
+    public int getIdPagamento() {
+        return idPagamento;
+    }
+    public String getDataPagamentio() {
+        return dataPagamento;
+    }
+    public void
 }
