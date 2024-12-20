@@ -33,7 +33,17 @@ public class Pagamentos {
     public void setValorPagamento(double valorPagamento){
         this.valorPagamento = valorPagamento;
     }
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+    public void setFormaPagamento (String FormaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+    public int getIdAluno() {
+        return idAluno;
+    }
+    public void setIdAluno(int idAluno) {
+        this.idAluno = idAluno;
+    }
     
-    
-    
-        }
+}
