@@ -10,5 +10,10 @@ c class Pagamentos {
     
     // Construtor para inicializat os atributos
     public Pagamentos(int idPagamento, String dataPagamento, double valorPagamento, String formaPagamento, int idAluno) {
-        
+        this.idPagamento = idPagamento;
+        this.dataPagamento = dataPagamento;
+        this.valorPagamento = valorPagamento;
+        this.formaPagamento = formaPagamento;
+        this.idAluno = idAluno;
+    }
 }
