@@ -46,4 +46,16 @@ public class Pagamentos {
         this.idAluno = idAluno;
     }
     
+    //Método para exibir os detalhes do pagamento 
+    @Override
+    public String toString() {
+        return "Pagamentos{" +
+                "idPagamento=" + idPagamento +
+                ", dataPagamento='" + dataPagamento + '\'' +
+                ", valorPagamento=" + valorPagamento +
+                ", formaPagamento='" + formaPagamento + '\'' +
+                ", idAluno=" + idAluno +
+                '}';
+    }
+    
 }
