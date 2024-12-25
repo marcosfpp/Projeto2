@@ -2,7 +2,8 @@ package academia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
+import java.util.Scanner;
+        
 /**
  *
  * @author Dheniel
@@ -25,7 +26,7 @@ public class Aluno {
      * @param emailAluno recebe o email do aluno
      * @param statusMatriculaAluno recebe a situação da matricula do aluno
      */
-    Aluno(int idAluno, String nomeAluno, int idadeAluno, String emailAluno, boolean statusMatriculaAluno) {
+    Aluno(int idAluno, String nomeAluno, int idadeAluno, String emailAluno) {
         this.idAluno = idAluno;
         this.nomeAluno = nomeAluno;
         this.idadeAluno = idadeAluno;
@@ -42,5 +43,48 @@ public class Aluno {
         if(situacaoPagamento){
             this.statusMatriculaAluno = true;
         } 
+    }
+    
+    public void cadastroAluno(){
+        try {
+            Scanner scan = new Scanner(System.in);
+       
+            System.out.println("Digite o nome do aluno: ");
+            String nome = scan.nextLine();
+            
+            System.out.println("Digite a idade do aluno: ");
+            int idade = scan.nextInt();
+            scan.nextLine();
+            
+            System.out.println("Digite o email do aluno: ");
+            String email = scan.nextLine();
+            
+            
+        }catch(Exception e){
+            System.out.println("Erro no cadastro");         
+        }
+    }
+    
+    public void inserirBanco(){
+        Connection conexao = new Conexao().getConexao();
+        
+        String sql = "INSERT INTO tb_aluno (idAluno, nomeAluno, idadeAluno, emailAluno, statusMatriculaAluno) VALUES (?, ?, ?, ?, ?)";
+        
+        try {
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, this.idAluno);
+            comando.setString(2, this.nomeAluno);
+            comando.setInt(3, this.idadeAluno);
+            comando.setString(4, this.emailAluno);
+            comando.setBoolean(5, this.statusMatriculaAluno);
+            
+            comando.execute();
+            comando.close();
+            
+            conexao.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            
+        }
     }
 }
