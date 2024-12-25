@@ -2,31 +2,28 @@
 package academia;
 
 /**
- * Subclasse para objetos do tipo Musculação que é herdado da superclasse Aula.
+ * Subclasse para objetos do tipo Crossfit que é herdado da superclasse Aula.
  * @author Marcus Vinícius Nunes Silva
- * @since 25/12/2024 at 14:07 PM
+ * @since 25/12/2024 at 15:09 PM
  */
-public class Musculacao extends Aula {
-    private String idAtividade; //Identificador da atividade.
+public class Crossfit extends Aula {
+    private String idAtividade; // Identificador da atividade.
     private String nomeAtividade; // Nome da atividade.
     
     /**
-     * Construtor que inicializa as informações da musculação.
+     * Construtor que inicializa as informações da aula.
      * @param idAula
      * @param horarioInicio
      * @param horarioFim
-     * @param aluno
-     * @param idAtividade
-     * @param nomeAtividade 
+     * @param aluno 
      */
-    public Musculacao(int idAula, String horarioInicio, String horarioFim, Aluno aluno, String idAtividade, String nomeAtividade) {
+    public Crossfit(int idAula, String horarioInicio, String horarioFim, Aluno aluno, String idAtividade, String nomeAtividade) {
         super(idAula, horarioInicio, horarioFim, aluno);
         this.idAtividade = idAtividade;
         this.nomeAtividade = nomeAtividade;
     }
-
-    //Get
     
+    //Get
     /**
      * Método para retornar o id da atividade.
      * @return idAtividade id da atividade
@@ -44,6 +41,7 @@ public class Musculacao extends Aula {
     }
     
     //Set
+    
     /**
      * Método para permitir a alteração da atividade após a criação.
      * @param idAtividade Identificador da atividade
@@ -53,7 +51,7 @@ public class Musculacao extends Aula {
     }
     
     /**
-    * Retorna uma representação textual do objeto Musculação.
+    * Retorna uma representação textual do objeto Crossfit.
     * @return uma string com os detalhes da aula
     */
     @Override
