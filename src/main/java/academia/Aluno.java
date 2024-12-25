@@ -2,7 +2,8 @@ package academia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
+import java.util.Scanner;
+        
 /**
  *
  * @author Dheniel
@@ -25,7 +26,7 @@ public class Aluno {
      * @param emailAluno recebe o email do aluno
      * @param statusMatriculaAluno recebe a situação da matricula do aluno
      */
-    Aluno(int idAluno, String nomeAluno, int idadeAluno, String emailAluno, boolean statusMatriculaAluno) {
+    Aluno(int idAluno, String nomeAluno, int idadeAluno, String emailAluno) {
         this.idAluno = idAluno;
         this.nomeAluno = nomeAluno;
         this.idadeAluno = idadeAluno;
@@ -42,5 +43,25 @@ public class Aluno {
         if(situacaoPagamento){
             this.statusMatriculaAluno = true;
         } 
+    }
+    
+    public void setCadastroAluno(){
+        try {
+            Scanner scan = new Scanner(System.in);
+       
+            System.out.println("Digite o nome do aluno: ");
+            String nome = scan.nextLine();
+            
+            System.out.println("Digite a idade do aluno: ");
+            int idade = scan.nextInt();
+            scan.nextLine();
+            
+            System.out.println("Digite o email do aluno: ");
+            String email = scan.nextLine();
+            
+            
+        }catch(Exception e){
+            System.out.println("Erro no cadastro");         
+        }
     }
 }
