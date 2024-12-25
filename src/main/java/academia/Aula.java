@@ -82,7 +82,7 @@ package academia;
     
     @Override
     public String toString() {
-        return "Informações da aula:\n" +
+        return "Informações da aula: " +
                 "Número da aula: " + idAula + "\n" +
                 "Nome do aluno: " + nome + "\n" +
                 "Horário da aula: " + horario + "\n" +
