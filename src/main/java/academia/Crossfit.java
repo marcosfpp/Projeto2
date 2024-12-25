@@ -11,11 +11,13 @@ public class Crossfit extends Aula {
     private String nomeAtividade; // Nome da atividade.
     
     /**
-     * Construtor que inicializa as informações da aula.
-     * @param idAula
-     * @param horarioInicio
-     * @param horarioFim
-     * @param aluno 
+     * Construtor que inicializa as informações da musculação.
+     * @param idAula Identificador da aula.
+     * @param horarioInicio Horário de início da aula.
+     * @param horarioFim Horário do fim da aula.
+     * @param aluno Objeto aluno associado a aula.
+     * @param idAtividade Identificador da atividade.
+     * @param nomeAtividade Nome da atividade.
      */
     public Crossfit(int idAula, String horarioInicio, String horarioFim, Aluno aluno, String idAtividade, String nomeAtividade) {
         super(idAula, horarioInicio, horarioFim, aluno);
@@ -24,6 +26,7 @@ public class Crossfit extends Aula {
     }
     
     //Get
+    
     /**
      * Método para retornar o id da atividade.
      * @return idAtividade id da atividade

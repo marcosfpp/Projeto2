@@ -12,12 +12,12 @@ public class Musculacao extends Aula {
     
     /**
      * Construtor que inicializa as informações da musculação.
-     * @param idAula
-     * @param horarioInicio
-     * @param horarioFim
-     * @param aluno
-     * @param idAtividade
-     * @param nomeAtividade 
+     * @param idAula Identificador da aula.
+     * @param horarioInicio Horário de início da aula.
+     * @param horarioFim Horário do fim da aula.
+     * @param aluno Objeto aluno associado a aula.
+     * @param idAtividade Identificador da atividade.
+     * @param nomeAtividade Nome da atividade.
      */
     public Musculacao(int idAula, String horarioInicio, String horarioFim, Aluno aluno, String idAtividade, String nomeAtividade) {
         super(idAula, horarioInicio, horarioFim, aluno);
