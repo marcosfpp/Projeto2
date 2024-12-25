@@ -45,7 +45,7 @@ public class Aluno {
         } 
     }
     
-    public void setCadastroAluno(){
+    public void cadastroAluno(){
         try {
             Scanner scan = new Scanner(System.in);
        
@@ -62,6 +62,29 @@ public class Aluno {
             
         }catch(Exception e){
             System.out.println("Erro no cadastro");         
+        }
+    }
+    
+    public void inserirBanco(){
+        Connection conexao = new Conexao().getConexao();
+        
+        String sql = "INSERT INTO tb_aluno (idAluno, nomeAluno, idadeAluno, emailAluno, statusMatriculaAluno) VALUES (?, ?, ?, ?, ?)";
+        
+        try {
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, this.idAluno);
+            comando.setString(2, this.nomeAluno);
+            comando.setInt(3, this.idadeAluno);
+            comando.setString(4, this.emailAluno);
+            comando.setBoolean(5, this.statusMatriculaAluno);
+            
+            comando.execute();
+            comando.close();
+            
+            conexao.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            
         }
     }
 }
