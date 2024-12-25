@@ -7,25 +7,22 @@ package academia;
  */
 public class Aula {
     private int idAula; // Identificador da aula.
-    private String nome; // Nome do aluno.
     private String horarioInicio; // Horário da aula.
     private String horarioFim; //Horário do fim da aula.
-    private int idAluno; // FK - Identificador do aluno.
+    private Aluno aluno; // Objeto aluno associado a aula.
 
     /**
     * Construtor que inicializa as informações da aula.
     * @param idAula Identificador único da aula.
-    * @param nome Nome do aluno.
     * @param horarioInicio Horário do início da aula.
     * @param horarioFim Horário do fim da aula.
-    * @param aluno Identificador do aluno.
+    * @param aluno Objeto aluno associado a aula.
     */
-    public Aula(int idAula, String nome, String horarioInicio, String horarioFim,int aluno) {
+    public Aula(int idAula, String horarioInicio, String horarioFim,Aluno aluno) {
         this.idAula = idAula;
-        this.nome = nome;
         this.horarioInicio = horarioInicio;
         this.horarioFim = horarioFim;
-        this.idAluno = aluno;
+        this.aluno = aluno;
     }
     
     //Get
@@ -37,15 +34,7 @@ public class Aula {
     public int getIdAula() {
         return this.idAula;
     }
-    
-    /**
-    * Método para retornar o nome do aluno.
-    * @return String nome do aluno.
-    */
-    public String getNome() {
-        return this.nome;
-    }
-    
+     
     /**
     * Método para retornar o horário do início da aula.
     * @return String o horário da aula no formato especificado.
@@ -60,14 +49,6 @@ public class Aula {
      */
     public String getHorarioFimAula() {
         return this.horarioFim;
-    }
-    
-    /**
-    * Método para retornar o id do aluno.
-    * @return int id do aluno.
-    */
-    public int getIdAluno() {
-        return this.idAluno;
     }
     
     //Set
@@ -104,9 +85,9 @@ public class Aula {
     public String toString() {
         return "Informações da aula: " +
                 "Número da aula: " + idAula + "\n" +
-                "Nome do aluno: " + nome + "\n" +
                 "Horário do início da aula: " + horarioInicio + "\n" +
-                "Horario do fim da aula:" + horarioFim + "\n" +
-                "Número do aluno: " + idAluno + "\n";
+                "Horario do fim da aula: " + horarioFim + "\n";
+                //aqui puxar um toString de aluno, para concatenar essa barra
+                //Ex: "Info aluno: " + aluno.toString();    
     }
 }
