@@ -1,5 +1,7 @@
 package academia;
 
+import java.util.Scanner;
+
 /**
  * Classe para objetos do tipo Aula.
  * @author Marcus Vinícius Nunes Silva
@@ -23,6 +25,29 @@ public class Aula {
         this.horarioInicio = horarioInicio;
         this.horarioFim = horarioFim;
         this.aluno = aluno;
+    }
+    
+    public void cadastroAula() {
+        try {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Digite seu nome:\n");
+            //get nome usuário no código do Dheniel, porém validar se vai ser criado outra váriavel
+            System.out.println("Digite seu e-mail:\n");
+            //get e-mail do usuário no código do Dheniel, porém validar se vai ser criado outra váriavel
+            System.out.println("Você deseja praticar qual atividade\n" + "1 - Masculação | 2 - Crossfit");
+            int idAtividade = scan.nextInt();
+            if (idAtividade > 2 || idAtividade < 1) {
+                System.out.println("Digite um número correto!");
+            } else {
+                System.out.println("Digite o horário que deseja iniciar a atividade:\n");
+                String horarioInicio = scan.nextLine();
+                System.out.println("Digite o horário que deseja finalizar a atividade:\n");
+                String horarioFim = scan.nextLine();
+            }
+            
+        }catch (Exception e) {
+            System.out.println("Erro no cadastro da aula, por favor tente novamente.");
+        }
     }
     
     //Get
