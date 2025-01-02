@@ -58,9 +58,35 @@ public class Aluno {
             comando.close();
             
             conexao.close();
+            
+            System.out.println("\n\nPerfeito, complete sua matricula efetuando o pagamento!\n");
         } catch (Exception e) {
             System.out.println(e);
             
         }
+    }
+    public void alterarAluno(String novoNome, int novaIdade, String novoEmail, int idAluno){
+        
+        Connection conexao = new Conexao().getConexao();
+        
+        String sql = "UPDATE aluno SET nome = ?, idade = ?, email = ? WHERE id = ?";
+        
+        try{
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            
+            comando.setString(1, novoNome);
+            comando.setInt(2, novaIdade);
+            comando.setString(3, novoEmail);
+            comando.setInt(4, idAluno);
+            
+            comando.executeUpdate();
+            comando.close();
+            conexao.close();
+            
+            System.out.println("Dados alterados!\n");
+        }catch (Exception e){
+            System.out.println("Erro ao atualizar cadastro de aluno!" + e.getMessage());
+        }
+        
     }
 }
