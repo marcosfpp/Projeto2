@@ -6,7 +6,6 @@ public class Pagamentos {
     private String dataPagamento;  // Data em que o pagamento foi realizado
     private double valorPagamento; // Valor do pagamento 
     private String formaPagamento;  // Forma de pagamento (ex: cartão, dinheiro, pix)
-    private int idAluno; // identificador do aluno relacionado ao pagamento 
     private boolean situacaoPagamento;
     
     // Construtor para inicializat os atributos
@@ -15,7 +14,6 @@ public class Pagamentos {
         this.dataPagamento = dataPagamento;
         this.valorPagamento = valorPagamento;
         this.formaPagamento = formaPagamento;
-        this.idAluno = idAluno;
         this.situacaoPagamento = false;
     }
     
@@ -41,12 +39,6 @@ public class Pagamentos {
     public void setFormaPagamento (String FormaPagamento) {
         this.formaPagamento = formaPagamento;
     }
-    public int getIdAluno() {
-        return idAluno;
-    }
-    public void setIdAluno(int idAluno) {
-        this.idAluno = idAluno;
-    }
     public void setPagarMensalidade(boolean mensalidade){
         this.situacaoPagamento = true;      
     }
@@ -62,7 +54,6 @@ public class Pagamentos {
                 ", dataPagamento='" + dataPagamento + '\'' +
                 ", valorPagamento=" + valorPagamento +
                 ", formaPagamento='" + formaPagamento + '\'' +
-                ", idAluno=" + idAluno +
                 '}';
     }
     

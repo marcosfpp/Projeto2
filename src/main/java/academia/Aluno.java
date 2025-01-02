@@ -15,23 +15,21 @@ public class Aluno {
     private String nomeAluno;
     private int idadeAluno;
     private String emailAluno;
-    private boolean statusMatriculaAluno; 
+    private String matricula; 
     
     /**
      * 
      * @return Método construtor para forçar a entrada dos atributos na classe
-     * @param idAluno recebe o id do aluno para identificação precisa
      * @param nomeAluno nome do aluno
      * @param idadeAluno recebe a idade do aluno
      * @param emailAluno recebe o email do aluno
      * @param statusMatriculaAluno recebe a situação da matricula do aluno
      */
-    Aluno(int idAluno, String nomeAluno, int idadeAluno, String emailAluno) {
-        this.idAluno = idAluno;
+    Aluno(String nomeAluno, int idadeAluno, String emailAluno) {
         this.nomeAluno = nomeAluno;
         this.idadeAluno = idadeAluno;
         this.emailAluno = emailAluno;
-        this.statusMatriculaAluno = false;
+        this.matricula = "Inativa";
     }
     /**
      * 
@@ -39,36 +37,14 @@ public class Aluno {
      * @param situacaoPagamento situação se o aluno efetuou o ou não o pagamento
      * @param statusMatriculaAluno define o status da matrícula
      */
-    public void setRenovarMatricula(boolean situacaoPagamento){
-        if(situacaoPagamento){
-            this.statusMatriculaAluno = true;
-        } 
-    }
-    
-    public void cadastroAluno(){
-        try {
-            Scanner scan = new Scanner(System.in);
-       
-            System.out.println("Digite o nome do aluno: ");
-            String nome = scan.nextLine();
-            
-            System.out.println("Digite a idade do aluno: ");
-            int idade = scan.nextInt();
-            scan.nextLine();
-            
-            System.out.println("Digite o email do aluno: ");
-            String email = scan.nextLine();
-            
-            
-        }catch(Exception e){
-            System.out.println("Erro no cadastro");         
-        }
+    public String getMatricula(){
+        return this.matricula;
     }
     
     public void inserirBanco(){
         Connection conexao = new Conexao().getConexao();
         
-        String sql = "INSERT INTO tb_aluno (idAluno, nomeAluno, idadeAluno, emailAluno, statusMatriculaAluno) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO aluno (id, nome, idade, email, matricula) VALUES (?, ?, ?, ?, ?)";
         
         try {
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -76,7 +52,7 @@ public class Aluno {
             comando.setString(2, this.nomeAluno);
             comando.setInt(3, this.idadeAluno);
             comando.setString(4, this.emailAluno);
-            comando.setBoolean(5, this.statusMatriculaAluno);
+            comando.setString(5, this.matricula);
             
             comando.execute();
             comando.close();
