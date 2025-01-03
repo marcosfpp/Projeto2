@@ -135,6 +135,34 @@ public class Academia {
                     }
                     break;
                 case 3:
+                    try{    
+                        System.out.println("\nALTERACAO CADASTRO DE ALUNO\n");
+                        
+                        System.out.println("Digite o id do aluno");
+                        int idBusca = scan.nextInt();
+
+                        boolean existe = verificarId(idBusca);
+                        
+                        if(existe){
+                            System.out.println("\nDigite o novo nome: ");
+                            String novoNome = scan.nextLine();
+                            
+                            System.out.println("Digite a nova idade: ");
+                            int novaIdade = scan.nextInt();
+                            scan.nextLine();
+                            
+                            System.out.println("Digite o email do aluno: ");
+                            String novoEmail = scan.nextLine();
+                            
+                            Aluno aluno = new Aluno();
+                            aluno.alterarAluno(novoNome, novaIdade, novoEmail, idBusca);
+                            scan.nextLine();
+                        }else{
+                            System.out.println("O ID " + idBusca + " nao foi encontrado!");
+                        }
+                    }catch(Exception e){
+                        System.out.println("Erro a alterar cadastro de aluno! " + e.getMessage());
+                    }
                     break;
                 case 4:
                     break;
