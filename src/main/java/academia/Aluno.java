@@ -2,6 +2,8 @@ package academia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import java.util.Scanner;
         
 /**
@@ -30,6 +32,8 @@ public class Aluno {
         this.idadeAluno = idadeAluno;
         this.emailAluno = emailAluno;
         this.matricula = "Inativa";
+    }
+    Aluno(){
     }
     /**
      * 
@@ -88,5 +92,32 @@ public class Aluno {
             System.out.println("Erro ao atualizar cadastro de aluno!" + e.getMessage());
         }
         
+    }
+    public void listarAlunos(){
+        Connection conexao = new Conexao().getConexao();
+        
+        String sql = "SELECT * FROM aluno";
+        
+        try{
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            ResultSet resultado = comando.executeQuery();
+            
+            while(resultado.next()){
+                int idAluno = resultado.getInt("id");
+                String nomeAluno = resultado.getString("nome");
+                int idadeAluno = resultado.getInt("idade");
+                String emailAluno = resultado.getString("email");
+                String matricula = resultado.getString("matricula");
+                
+                System.out.printf("ID Aluno: %d | Nome = %s | Idade = %s | Email: %s | Situacao matricula: %s%n", idAluno, nomeAluno, idadeAluno, emailAluno, matricula);
+                
+                resultado.close();
+                comando.close();
+                conexao.close();
+            }
+        }catch (Exception e){
+            System.out.println("Erro ao listar alunos!" + e.getMessage());
+                    
+        }
     }
 }
