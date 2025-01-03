@@ -9,7 +9,10 @@ public class Academia {
 
     public static void main(String[] args) {
         int opcMenu = 0;
-
+        int posAlunos = 0;
+        int posPag = 0;
+        Aluno[] alunos = new Aluno[50];
+        Pagamentos[] pagamentos = new Pagamentos[50];
         Scanner scan = new Scanner(System.in);
 
         do {
@@ -27,6 +30,33 @@ public class Academia {
 
             switch (opcMenu) {
                 case 1:
+                    try{
+                        System.out.println("\nCADASTRO DE ALUNOS\n");
+                        
+                        for(int i = 0; i < alunos.length; i++){
+                            if(alunos[i] != null){
+                                posAlunos++;
+                            }
+                        }
+                        
+                        System.out.print("Digite o nome do aluno: ");
+                        String nome = scan.nextLine();
+                        
+                        System.out.print("\nDigite a idade do aluno: ");
+                        int idade = scan.nextInt();
+                        scan.nextLine();
+                        
+                        System.out.print("\nDigite o email do aluno: ");
+                        String email = scan.nextLine();
+                        
+                        Aluno infoAlunos = new Aluno(nome, idade, email);
+                        alunos[posAlunos] = infoAlunos;
+                        alunos[posAlunos].inserirBanco();
+                        scan.nextLine();
+                        
+                    }catch(Exception e){
+                        System.out.println("\nErro ao tentar cadastrar aluno!" + e.getMessage());
+                    }
                     break;
                 case 2:
                     break;
