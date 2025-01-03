@@ -59,6 +59,35 @@ public class Pagamentos {
             System.out.println("Erro ao atualizar aluno: " + e.getMessage());
         }
     }
+    public void listaPagamentos(){
+        Connection conexao = new Conexao().getConexao();
+        
+        String sql = "SELECT pagamentos.id AS id_pagamento, pagamentos.dataPag, pagamentos.formaPag, aluno.id AS id_aluno, aluno.nome AS nome_ aluno" +
+                "FROM pagamentos" +
+                "INNER JOIN aluno ON pagamentos.id_aluno = aluno.id";
+        try{
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            ResultSet resultado = comando.executeQuery();
+            
+            System.out.println("\nPagamentos realizados:");
+            System.out.println("=======================================");
+            
+            while (resultado.next()){
+                int idPagamento = resultado.getInt("id_pagamento");
+                String dataPagamento = resultado.getString("dataPag");
+                String formaPagamento = resultado.getString("formaPag");
+                int idAluno = resultado.getInt("id_aluno");
+                String nomeAluno = resultado.getString("nome_aluno");
+                
+                System.out.printf("ID Pagamento: %d | Data: %s | Forma de pagamento: %s | ID do aluno: %d | Nome do aluno: %s%n", idPagamento, dataPagamento, formaPagamento, idAluno, nomeAluno);
+            }
+            resultado.close();
+            comando.close();
+            conexao.close();
+        }catch(Exception e){
+            System.out.println("Erro ao listar pagamentos" + e.getMessage());
+        }
+    }
     
     //Método para exibir os detalhes do pagamento 
     @Override

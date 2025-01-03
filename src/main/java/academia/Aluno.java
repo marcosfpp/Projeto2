@@ -102,6 +102,9 @@ public class Aluno {
             PreparedStatement comando = conexao.prepareStatement(sql);
             ResultSet resultado = comando.executeQuery();
             
+            System.out.println("\nAlunos cadastrados:");
+            System.out.println("=======================================");
+            
             while(resultado.next()){
                 int idAluno = resultado.getInt("id");
                 String nomeAluno = resultado.getString("nome");
