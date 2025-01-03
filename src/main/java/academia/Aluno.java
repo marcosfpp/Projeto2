@@ -120,4 +120,22 @@ public class Aluno {
                     
         }
     }
+    public void excluirAluno(int Aluno){
+        Connection conexao = new Conexao().getConexao();
+        String sql = "DELETE FROM aluno WHERE id = ?";
+        
+        try{
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, idAluno);
+            
+            int linhasAfetadas = comando.executeUpdate();
+            
+            if (linhasAfetadas > 0){
+                System.out.println("\nCadastro excluido com sucesso");
+            }
+            
+        }catch(Exception e){
+            System.out.println("Erro a excluir aluno" + e.getMessage());
+        }
+    }
 }
