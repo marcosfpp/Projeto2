@@ -30,6 +30,25 @@ public class Academia {
         return existe;
     }
     
+    public static void validarMatricula(String matricula, int idAluno){
+        Connection conexao = new Conexao().getConexao();
+        String sql = "UPDATE aluno SET matricula = ? WHERE id = ?";
+        
+        try{
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            
+            comando.setString(1, matricula);
+            comando.setInt(2, idAluno);
+            
+            comando.executeUpdate();
+            
+            comando.close();
+            conexao.close();
+        }catch(Exception e){
+            System.out.println("Erro ao validar matricula!" + e.getMessage());
+        }
+    }
+    
     public static void main(String[] args) {
         int opcMenu = 0;
         int posAlunos = 0;
