@@ -6,7 +6,30 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class Academia {
+    
+    public static boolean verificarId(int idProcurado){
+        Connection conexao = new Conexao().getConexao();
+        String sql = "SELECT COUNT(*) FROM aluno WHERE id = ?";
+        
+        boolean existe = false; 
+        
+        try{
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, idProcurado);
+            
+            try(ResultSet resultado = comando.executeQuery()){
+                if(resultado.next()){
+                    int quantidade = resultado.getInt(1);
+                    existe = quantidade > 0;
+                }
+            }
 
+        }catch(Exception e){
+            System.out.println("Erro ao verificar id!" + e.getMessage());
+        }
+        return existe;
+    }
+    
     public static void main(String[] args) {
         int opcMenu = 0;
         int posAlunos = 0;
