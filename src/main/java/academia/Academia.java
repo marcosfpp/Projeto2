@@ -65,17 +65,26 @@ public class Academia {
                 case 4:
                     break;
                 case 5:
+                    Aluno aluno = new Aluno();
+                    aluno.listarAlunos();
+                    scan.nextLine();
                     break;
-                    
                 case 6:
+                    Pagamentos pagamento = new Pagamentos();
+                    pagamento.listaPagamentos();
+                    scan.nextLine();
                     break;
                 case 7:
                     break;  
                 case 8:
                     break;
                 case 9:
+                    System.out.println("\nObrigado pela preferencia!");
+                    scan.nextLine();
                     break;
                 default:
+                    System.out.println("\nDigite uma opcao valida");
+                    scan.nextLine();
                     break;
             }
 
