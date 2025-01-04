@@ -131,16 +131,30 @@ public class Aluno {
 
     public void excluirAluno(int Aluno) {
         Connection conexao = new Conexao().getConexao();
-        String sql = "DELETE FROM aluno WHERE id = ?";
 
         try {
-            PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, idAluno);
+            String sqlPagamentos = "DELETE FROM pagamentos WHERE id_aluno = ?";
+            PreparedStatement comandoPagamentos = conexao.prepareStatement(sqlPagamentos);
+            comandoPagamentos.setInt(1, idAluno);
+            
+            int pagamentosRemovidos = comandoPagamentos.executeUpdate();
+            comandoPagamentos.close();
+ 
+            
+            String sqlAluno = "DELETE FROM aluno WHERE id = ?";
+            PreparedStatement comandoAluno = conexao.prepareStatement(sqlAluno);
+            comandoAluno.setInt(1, idAluno);
 
-            int linhasAfetadas = comando.executeUpdate();
+            int alunosRemovidos = comandoAluno.executeUpdate();
+            comandoAluno.close();
 
-            if (linhasAfetadas > 0) {
+            if (alunosRemovidos> 0) {
                 System.out.println("\nCadastro excluido com sucesso");
+                if(pagamentosRemovidos > 0){
+                    System.out.println("Dados de pagamentos do aluno removido com sucesso!");
+                }
+            } else {
+                System.out.println("Nao foi encontrado aluno com o id dado!");
             }
 
         } catch (Exception e) {
