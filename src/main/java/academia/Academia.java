@@ -165,6 +165,25 @@ public class Academia {
                     }
                     break;
                 case 4:
+                    try{
+                        System.out.println("\nEXCLUIR CADASTRO DE ALUNOS\n");
+                        
+                        System.out.println("Digite o id do aluno: ");
+                        int idBusca = scan.nextInt();
+                        scan.nextLine();
+                        
+                        boolean existe = verificarId(idBusca);
+                        
+                        if(existe){
+                            Aluno aluno = new Aluno();
+                            aluno.excluirAluno(idBusca);
+                            scan.nextLine();
+                        } else{
+                            System.out.println("O ID " + " nao foi encontrado!");
+                        }
+                    }catch(Exception e){
+                        System.out.println("Erro ao excluir aluno! " + e.getMessage());
+                    }
                     break;
                 case 5:
                     Aluno aluno = new Aluno();
