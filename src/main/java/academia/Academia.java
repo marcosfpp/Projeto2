@@ -209,7 +209,7 @@ public class Academia {
                     break;
             }
 
-        } while (opcMenu != 0);
+        } while (opcMenu != 9);
     }
 
 }
