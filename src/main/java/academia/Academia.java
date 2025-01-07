@@ -107,6 +107,7 @@ public class Academia {
 
                         System.out.println("Digite o id do aluno");
                         int idBusca = scan.nextInt();
+                        scan.nextLine();
 
                         boolean existe = verificarId(idBusca);
 
@@ -126,9 +127,9 @@ public class Academia {
                             Pagamentos infoPagamentos = new Pagamentos(dataAtual, formaPagamento, idBusca);
                             pagamentos[posPag] = infoPagamentos;
                             pagamentos[posPag].inserirBanco();
-                            if(formaPagamento != null){
-                                Aluno.setMatriculaAtiva(true);
-                            }
+                            //if(formaPagamento != null){
+                            //Aluno.setMatriculaAtiva(true);
+                            //}
                             
                             validarMatricula("Ativa", idBusca);
                         } else {
@@ -144,6 +145,7 @@ public class Academia {
                         
                         System.out.println("Digite o id do aluno");
                         int idBusca = scan.nextInt();
+                        scan.nextLine();
 
                         boolean existe = verificarId(idBusca);
                         
@@ -200,6 +202,24 @@ public class Academia {
                     scan.nextLine();
                     break;
                 case 7:
+                    try{
+                        System.out.print("\nMATRICULAR EM AULA\n");
+                        System.out.println("Veja as informações das aulas a seguir: ");
+                        
+                        System.out.println("Digite o id do aluno");
+                        int idBusca = scan.nextInt();
+                        scan.nextLine();
+                        
+                        boolean existe = verificarId(idBusca);
+                        
+                        if(existe){
+                            
+                        }else{
+                            System.out.println("O ID " + " nao foi encontrado!");
+                        }
+                    }catch(Exception e){
+                        System.out.println("Erro ao matricular em aula! " + e.getMessage());
+                    }
                     break;
                 case 8:
                     break;

@@ -29,13 +29,11 @@ public class Aluno {
      * @param emailAluno recebe o email do aluno
      * @param statusMatriculaAluno recebe a situação da matricula do aluno
      */
-    Aluno(String nomeAluno, int idadeAluno, String emailAluno, String matricula, boolean matriculaAtiva) {
+    Aluno(String nomeAluno, int idadeAluno, String emailAluno) {
         this.nomeAluno = nomeAluno;
         this.idadeAluno = idadeAluno;
         this.emailAluno = emailAluno;
-        this.matricula = matricula;
-        this.matriculaAtiva = false;
-        
+        this.matricula = "Inativa";        
     }
 
     Aluno() {
@@ -133,17 +131,17 @@ public class Aluno {
 
                 System.out.printf("ID Aluno: %d | Nome = %s | Idade = %s | Email: %s | Situacao matricula: %s%n", idAluno, nomeAluno, idadeAluno, emailAluno, matricula);
 
-                resultado.close();
-                comando.close();
-                conexao.close();
             }
+            resultado.close();
+            comando.close();
+            conexao.close();
         } catch (Exception e) {
             System.out.println("Erro ao listar alunos!" + e.getMessage());
 
         }
     }
 
-    public void excluirAluno(int Aluno) {
+    public void excluirAluno(int idAluno) {
         Connection conexao = new Conexao().getConexao();
 
         try {

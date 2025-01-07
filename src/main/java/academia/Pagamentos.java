@@ -70,9 +70,10 @@ public class Pagamentos {
     public void listaPagamentos() {
         Connection conexao = new Conexao().getConexao();
 
-        String sql = "SELECT pagamentos.id AS id_pagamento, pagamentos.dataPag, pagamentos.formaPag, aluno.id AS id_aluno, aluno.nome AS nome_ aluno"
-                + "FROM pagamentos"
-                + "INNER JOIN aluno ON pagamentos.id_aluno = aluno.id";
+        String sql = "SELECT pagamentos.id AS id_pagamento, pagamentos.dataPag, pagamentos.formaPag, "
+               + "aluno.id AS id_aluno, aluno.nome AS nome_aluno "
+               + "FROM pagamentos "
+               + "INNER JOIN aluno ON pagamentos.id_aluno = aluno.id";
         try {
             PreparedStatement comando = conexao.prepareStatement(sql);
             ResultSet resultado = comando.executeQuery();

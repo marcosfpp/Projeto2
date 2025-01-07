@@ -8,24 +8,19 @@ import java.util.Scanner;
  * @since 23-12-2024 at 11:13 AM
  */
 public class Aula {
-    private int idAula; // Identificador da aula.
     private String horarioInicio; // Horário da aula.
     private String horarioFim; //Horário do fim da aula.
-    private Aluno aluno; // Objeto aluno associado a aula.
-    private int tipoDeAula; // Diferenciacao de aula
+    private String instrutor; // Diferenciacao de aula
 
     /**
     * Construtor que inicializa as informações da aula.
-    * @param idAula Identificador único da aula.
     * @param horarioInicio Horário do início da aula.
     * @param horarioFim Horário do fim da aula.
     * @param aluno Objeto aluno associado a aula.
     */
-    public Aula(int idAula, String horarioInicio, String horarioFim,Aluno aluno) {
-        this.idAula = idAula;
+    public Aula(String horarioInicio, String horarioFim,Aluno aluno) {
         this.horarioInicio = horarioInicio;
         this.horarioFim = horarioFim;
-        this.aluno = aluno;
     }
     
     public void cadastroAula() {
@@ -53,14 +48,6 @@ public class Aula {
     
     //Get
     
-    /**
-    * Método para retornar o id do aula.
-    * @return int id da aula.
-    */
-    public int getIdAula() {
-        return this.idAula;
-    }
-     
     /**
     * Método para retornar o horário do início da aula.
     * @return String o horário da aula no formato especificado.
@@ -116,7 +103,6 @@ public class Aula {
     @Override
     public String toString() {
         return "Informações da aula: " +
-                "Número da aula: " + idAula + "\n" +
                 "Horário do início da aula: " + horarioInicio + "\n" +
                 "Horario do fim da aula: " + horarioFim + "\n";
                 //aqui puxar um toString de aluno, para concatenar essa barra
