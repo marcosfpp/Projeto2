@@ -12,6 +12,7 @@ public class Aula {
     private String horarioInicio; // Horário da aula.
     private String horarioFim; //Horário do fim da aula.
     private Aluno aluno; // Objeto aluno associado a aula.
+    private int tipoDeAula; // Diferenciacao de aula
 
     /**
     * Construtor que inicializa as informações da aula.
@@ -76,6 +77,12 @@ public class Aula {
         return this.horarioFim;
     }
     
+    /**
+     * Verificar pagamento = designar aula
+     */
+    
+
+            
     //Set
     
     /**

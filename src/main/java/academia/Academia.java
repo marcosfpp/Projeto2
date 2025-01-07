@@ -126,6 +126,10 @@ public class Academia {
                             Pagamentos infoPagamentos = new Pagamentos(dataAtual, formaPagamento, idBusca);
                             pagamentos[posPag] = infoPagamentos;
                             pagamentos[posPag].inserirBanco();
+                            if(formaPagamento != null){
+                                Aluno.setMatriculaAtiva(true);
+                            }
+                            
                             validarMatricula("Ativa", idBusca);
                         } else {
                             System.out.println("O ID " + idBusca + " nao foi encontrado!");

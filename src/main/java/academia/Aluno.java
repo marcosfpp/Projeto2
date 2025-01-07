@@ -18,6 +18,8 @@ public class Aluno {
     private int idadeAluno;
     private String emailAluno;
     private String matricula;
+    private boolean matriculaAtiva;
+
 
     /**
      *
@@ -27,11 +29,13 @@ public class Aluno {
      * @param emailAluno recebe o email do aluno
      * @param statusMatriculaAluno recebe a situação da matricula do aluno
      */
-    Aluno(String nomeAluno, int idadeAluno, String emailAluno) {
+    Aluno(String nomeAluno, int idadeAluno, String emailAluno, String matricula, boolean matriculaAtiva) {
         this.nomeAluno = nomeAluno;
         this.idadeAluno = idadeAluno;
         this.emailAluno = emailAluno;
-        this.matricula = "Inativa";
+        this.matricula = matricula;
+        this.matriculaAtiva = false;
+        
     }
 
     Aluno() {
@@ -73,6 +77,16 @@ public class Aluno {
         }
     }
 
+        // Setter para permitir alterar o status da matrícula
+        public void setMatriculaAtiva(boolean matriculaAtiva) {
+            this.matriculaAtiva = matriculaAtiva;
+        }
+    
+        //Getter para permitir verificar o status da matricula
+        public boolean verificarMatriculaAtiva(){
+            return matriculaAtiva;
+        }
+    
     public void alterarAluno(String novoNome, int novaIdade, String novoEmail, int idAluno) {
 
         Connection conexao = new Conexao().getConexao();
