@@ -18,7 +18,7 @@ public class Aluno {
     private int idadeAluno;
     private String emailAluno;
     private String matricula;
-    private boolean matriculaAtiva;
+    private String tipoAula;
 
 
     /**
@@ -33,7 +33,8 @@ public class Aluno {
         this.nomeAluno = nomeAluno;
         this.idadeAluno = idadeAluno;
         this.emailAluno = emailAluno;
-        this.matricula = "Inativa";        
+        this.matricula = "Inativa";  
+        this.tipoAula = "Desmatriculado";
     }
 
     Aluno() {
@@ -75,15 +76,6 @@ public class Aluno {
         }
     }
 
-        // Setter para permitir alterar o status da matrícula
-        public void setMatriculaAtiva(boolean matriculaAtiva) {
-            this.matriculaAtiva = matriculaAtiva;
-        }
-    
-        //Getter para permitir verificar o status da matricula
-        public boolean verificarMatriculaAtiva(){
-            return matriculaAtiva;
-        }
     
     public void alterarAluno(String novoNome, int novaIdade, String novoEmail, int idAluno) {
 
@@ -172,5 +164,31 @@ public class Aluno {
         } catch (Exception e) {
             System.out.println("Erro a excluir aluno" + e.getMessage());
         }
+    }
+    public boolean verificarMatriculaAtiva(int idAluno){
+        Connection conexao = new Conexao().getConexao();
+       
+        String sql = "SELECT matricula FROM aluno WHERE id = ?";
+        boolean matriculaAtiva = false;
+        
+        try {
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, idAluno);
+            
+            ResultSet resultado = comando.executeQuery();
+            
+            if(resultado.next()){
+                String statusMatricula = resultado.getString("matricula");
+                if("Ativa".equalsIgnoreCase(statusMatricula)){
+                    matriculaAtiva = true;
+                }
+            }
+            resultado.close();
+            comando.close();
+            conexao.close();
+        }catch(Exception e){
+            System.out.println("Erro ao verificar matricula: " + e.getMessage());
+        }
+        return matriculaAtiva;
     }
 }

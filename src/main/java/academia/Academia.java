@@ -204,7 +204,20 @@ public class Academia {
                 case 7:
                     try{
                         System.out.print("\nMATRICULAR EM AULA\n");
-                        System.out.println("Veja as informações das aulas a seguir: ");
+                        System.out.println("Veja as informacoes das aulas a seguir: ");
+                        
+                        Musculacao infoMusc = new Musculacao("15:00h","17:00h","Marcos Felipe");
+                        Crossfit infoCross = new Crossfit("9:00h","11:00h","Marcus Vinicius");
+                        
+                        infoMusc.toString();
+                        System.out.println("\n");
+                        infoCross.toString();
+                        scan.nextLine();
+                        
+                        System.out.println("Escolha o tipo de aula desejado! ");
+                        System.out.println("Crossfit = C");
+                        System.out.println("Musculacao = M");
+                        String escolha = scan.nextLine();
                         
                         System.out.println("Digite o id do aluno");
                         int idBusca = scan.nextInt();
@@ -214,6 +227,12 @@ public class Academia {
                         
                         if(existe){
                             
+                            if(escolha == "C" || escolha == "c"){
+                                
+                            }
+                            else if (escolha == "M" || escolha == "m" ){
+                                
+                            }
                         }else{
                             System.out.println("O ID " + " nao foi encontrado!");
                         }

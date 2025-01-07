@@ -18,9 +18,10 @@ public class Aula {
     * @param horarioFim Horário do fim da aula.
     * @param aluno Objeto aluno associado a aula.
     */
-    public Aula(String horarioInicio, String horarioFim,Aluno aluno) {
+    public Aula(String horarioInicio, String horarioFim,String instrutor) {
         this.horarioInicio = horarioInicio;
         this.horarioFim = horarioFim;
+        this.instrutor = instrutor;
     }
     
     public void cadastroAula() {
@@ -64,12 +65,10 @@ public class Aula {
         return this.horarioFim;
     }
     
-    /**
-     * Verificar pagamento = designar aula
-     */
-    
 
-            
+     public String getInstrutor(){
+         return this.instrutor;
+     }
     //Set
     
     /**
