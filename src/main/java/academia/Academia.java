@@ -49,6 +49,26 @@ public class Academia {
         }
     }
     
+    public static void definirCrossfit(String tipoAula, int idAluno) {
+        Connection conexao = new Conexao().getConexao();
+        String sql = "UPDATE aluno SET tipo_aula = ? WHERE id = ?";
+
+        try {
+            PreparedStatement comando = conexao.prepareStatement(sql);
+
+            comando.setString(1, tipoAula);
+            comando.setInt(2, idAluno);
+
+            comando.executeUpdate();
+
+            comando.close();
+            conexao.close();
+        } catch (Exception e) {
+            System.out.println("Erro ao validar matricula!" + e.getMessage());
+        }
+    }
+    
+    
     public static boolean verificarMatriculaAtiva(int idAluno){
         Connection conexao = new Conexao().getConexao();
        
@@ -268,14 +288,19 @@ public class Academia {
                         
                         boolean existe = verificarId(idBusca);
                         boolean pagamento = verificarMatriculaAtiva(idBusca);
+                        boolean inscricaoAula = verificarAula(idBusca);
                         
                         if(existe){
                             if(pagamento){
-                                if(escolha == "C" || escolha == "c"){
-                                    
-                                }
-                                else if (escolha == "M" || escolha == "m" ){
+                                if(inscricaoAula){
+                                    if(escolha == "C" || escolha == "c"){
+                                        
+                                    }
+                                    else if (escolha == "M" || escolha == "m" ){
 
+                                    }
+                                }else {
+                                    System.out.println("o usuário já está inscrito em uma aula!");
                                 }
                             }else {
                                 System.out.println("O usuário não realizou o pagamento! ");
