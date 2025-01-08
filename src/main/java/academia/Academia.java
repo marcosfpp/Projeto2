@@ -48,7 +48,61 @@ public class Academia {
             System.out.println("Erro ao validar matricula!" + e.getMessage());
         }
     }
-
+    
+    public static boolean verificarMatriculaAtiva(int idAluno){
+        Connection conexao = new Conexao().getConexao();
+       
+        String sql = "SELECT matricula FROM aluno WHERE id = ?";
+        boolean matriculaAtiva = false;
+        
+        try {
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, idAluno);
+            
+            ResultSet resultado = comando.executeQuery();
+            
+            if(resultado.next()){
+                String statusMatricula = resultado.getString("matricula");
+                if("Ativa".equalsIgnoreCase(statusMatricula)){
+                    matriculaAtiva = true;
+                }
+            }
+            resultado.close();
+            comando.close();
+            conexao.close();
+        }catch(Exception e){
+            System.out.println("Erro ao verificar matricula: " + e.getMessage());
+        }
+        return matriculaAtiva;
+    }
+    
+    public static boolean verificarAula(int idAluno){
+        Connection conexao = new Conexao().getConexao();
+       
+        String sql = "SELECT tipo_aula FROM aluno WHERE id = ?";
+        boolean aulaInscrita = false;
+        
+        try {
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, idAluno);
+            
+            ResultSet resultado = comando.executeQuery();
+            
+            if(resultado.next()){
+                String statusMatricula = resultado.getString("tipo_aula");
+                if("Parado".equalsIgnoreCase(statusMatricula)){
+                    aulaInscrita = true;
+                }
+            }
+            resultado.close();
+            comando.close();
+            conexao.close();
+        }catch(Exception e){
+            System.out.println("Erro ao verificar matricula: " + e.getMessage());
+        }
+        return aulaInscrita;
+    }
+    
     public static void main(String[] args) {
         int opcMenu = 0;
         int posAlunos = 0;
@@ -62,8 +116,8 @@ public class Academia {
             System.out.println("2 - Realizar pagamento de mensalidade");
             System.out.println("3 - Alterar cadastro de aluno");
             System.out.println("4 - Excluir cadastro de aluno");
-            System.out.println("5 - Listar alunos");
-            System.out.println("6 - Pagamentos");
+            System.out.println("7 - Listar alunos");
+            System.out.println("8 - Pagamentos");
             System.out.println("9 - Sair");
 
             System.out.print("Digite uma opcao: ");
@@ -192,16 +246,6 @@ public class Academia {
                     }
                     break;
                 case 5:
-                    Aluno aluno = new Aluno();
-                    aluno.listarAlunos();
-                    scan.nextLine();
-                    break;
-                case 6:
-                    Pagamentos pagamento = new Pagamentos();
-                    pagamento.listaPagamentos();
-                    scan.nextLine();
-                    break;
-                case 7:
                     try{
                         System.out.print("\nMATRICULAR EM AULA\n");
                         System.out.println("Veja as informacoes das aulas a seguir: ");
@@ -212,7 +256,6 @@ public class Academia {
                         infoMusc.toString();
                         System.out.println("\n");
                         infoCross.toString();
-                        scan.nextLine();
                         
                         System.out.println("Escolha o tipo de aula desejado! ");
                         System.out.println("Crossfit = C");
@@ -224,14 +267,18 @@ public class Academia {
                         scan.nextLine();
                         
                         boolean existe = verificarId(idBusca);
+                        boolean pagamento = verificarMatriculaAtiva(idBusca);
                         
                         if(existe){
-                            
-                            if(escolha == "C" || escolha == "c"){
-                                
-                            }
-                            else if (escolha == "M" || escolha == "m" ){
-                                
+                            if(pagamento){
+                                if(escolha == "C" || escolha == "c"){
+                                    
+                                }
+                                else if (escolha == "M" || escolha == "m" ){
+
+                                }
+                            }else {
+                                System.out.println("O usuário não realizou o pagamento! ");
                             }
                         }else{
                             System.out.println("O ID " + " nao foi encontrado!");
@@ -240,7 +287,18 @@ public class Academia {
                         System.out.println("Erro ao matricular em aula! " + e.getMessage());
                     }
                     break;
+                case 6:
+                    break;
+                case 7:
+                    Aluno aluno = new Aluno();
+                    aluno.listarAlunos();
+                    scan.nextLine();
+                    break;
                 case 8:
+                    Pagamentos pagamento = new Pagamentos();
+                    pagamento.listaPagamentos();
+                    scan.nextLine();
+                        scan.nextLine();
                     break;
                 case 9:
                     System.out.println("\nObrigado pela preferencia!");

@@ -34,7 +34,7 @@ public class Aluno {
         this.idadeAluno = idadeAluno;
         this.emailAluno = emailAluno;
         this.matricula = "Inativa";  
-        this.tipoAula = "Desmatriculado";
+        this.tipoAula = "Parado";
     }
 
     Aluno() {
@@ -54,7 +54,7 @@ public class Aluno {
     public void inserirBanco() {
         Connection conexao = new Conexao().getConexao();
 
-        String sql = "INSERT INTO aluno (id, nome, idade, email, matricula) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO aluno (id, nome, idade, email, matricula, tipo_aula) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -63,6 +63,7 @@ public class Aluno {
             comando.setInt(3, this.idadeAluno);
             comando.setString(4, this.emailAluno);
             comando.setString(5, this.matricula);
+            comando.setString(6, this.tipoAula);
 
             comando.execute();
             comando.close();
@@ -120,8 +121,9 @@ public class Aluno {
                 int idadeAluno = resultado.getInt("idade");
                 String emailAluno = resultado.getString("email");
                 String matricula = resultado.getString("matricula");
+                String tipoAula = resultado.getString("tipo_aula");
 
-                System.out.printf("ID Aluno: %d | Nome = %s | Idade = %s | Email: %s | Situacao matricula: %s%n", idAluno, nomeAluno, idadeAluno, emailAluno, matricula);
+                System.out.printf("ID Aluno: %d | Nome = %s | Idade = %s | Email: %s | Situacao matricula: %s | Tipo de aula: %s%n", idAluno, nomeAluno, idadeAluno, emailAluno, matricula, tipoAula);
 
             }
             resultado.close();
@@ -164,31 +166,5 @@ public class Aluno {
         } catch (Exception e) {
             System.out.println("Erro a excluir aluno" + e.getMessage());
         }
-    }
-    public boolean verificarMatriculaAtiva(int idAluno){
-        Connection conexao = new Conexao().getConexao();
-       
-        String sql = "SELECT matricula FROM aluno WHERE id = ?";
-        boolean matriculaAtiva = false;
-        
-        try {
-            PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, idAluno);
-            
-            ResultSet resultado = comando.executeQuery();
-            
-            if(resultado.next()){
-                String statusMatricula = resultado.getString("matricula");
-                if("Ativa".equalsIgnoreCase(statusMatricula)){
-                    matriculaAtiva = true;
-                }
-            }
-            resultado.close();
-            comando.close();
-            conexao.close();
-        }catch(Exception e){
-            System.out.println("Erro ao verificar matricula: " + e.getMessage());
-        }
-        return matriculaAtiva;
     }
 }
