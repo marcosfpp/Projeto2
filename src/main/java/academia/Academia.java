@@ -49,7 +49,7 @@ public class Academia {
         }
     }
     
-    public static void definirCrossfit(String tipoAula, int idAluno) {
+    public static void definirAula(String tipoAula, int idAluno) {
         Connection conexao = new Conexao().getConexao();
         String sql = "UPDATE aluno SET tipo_aula = ? WHERE id = ?";
 
@@ -60,14 +60,15 @@ public class Academia {
             comando.setInt(2, idAluno);
 
             comando.executeUpdate();
-
+            
+            System.out.println("Voce esta inscrito nas aulas de "+ tipoAula +", aproveite o treinamento!");
+            
             comando.close();
             conexao.close();
         } catch (Exception e) {
             System.out.println("Erro ao validar matricula!" + e.getMessage());
         }
     }
-    
     
     public static boolean verificarMatriculaAtiva(int idAluno){
         Connection conexao = new Conexao().getConexao();
@@ -136,8 +137,10 @@ public class Academia {
             System.out.println("2 - Realizar pagamento de mensalidade");
             System.out.println("3 - Alterar cadastro de aluno");
             System.out.println("4 - Excluir cadastro de aluno");
-            System.out.println("7 - Listar alunos");
-            System.out.println("8 - Pagamentos");
+            System.out.println("5 - Inscrever em aula");
+            System.out.println("6 - Listar alunos");
+            System.out.println("7 - Pagamentos");
+            System.out.println("8 - Exportar relatorios");
             System.out.println("9 - Sair");
 
             System.out.print("Digite uma opcao: ");
@@ -277,10 +280,11 @@ public class Academia {
                         System.out.println("\n");
                         infoCross.toString();
                         
+                        System.out.println("1 - Crossfit");
+                        System.out.println("2 - Musculacao");
                         System.out.println("Escolha o tipo de aula desejado! ");
-                        System.out.println("Crossfit = C");
-                        System.out.println("Musculacao = M");
-                        String escolha = scan.nextLine();
+                        int escolha = scan.nextInt();
+                        scan.nextLine();
                         
                         System.out.println("Digite o id do aluno");
                         int idBusca = scan.nextInt();
@@ -293,11 +297,18 @@ public class Academia {
                         if(existe){
                             if(pagamento){
                                 if(inscricaoAula){
-                                    if(escolha == "C" || escolha == "c"){
-                                        
-                                    }
-                                    else if (escolha == "M" || escolha == "m" ){
-
+                                    switch (escolha){
+                                        case 1: 
+                                            definirAula("Crossfit", idBusca);
+                                            scan.nextLine();
+                                            break;
+                                        case 2: 
+                                            definirAula("Musculacao", idBusca);
+                                            scan.nextLine();
+                                            break;
+                                        default:
+                                            System.out.println("Digite uma opcao valida!");
+                                            break;
                                     }
                                 }else {
                                     System.out.println("o usuário já está inscrito em uma aula!");
@@ -313,17 +324,17 @@ public class Academia {
                     }
                     break;
                 case 6:
-                    break;
-                case 7:
                     Aluno aluno = new Aluno();
                     aluno.listarAlunos();
                     scan.nextLine();
                     break;
-                case 8:
+                case 7:
                     Pagamentos pagamento = new Pagamentos();
                     pagamento.listaPagamentos();
                     scan.nextLine();
                         scan.nextLine();
+                    break;
+                case 8:
                     break;
                 case 9:
                     System.out.println("\nObrigado pela preferencia!");
