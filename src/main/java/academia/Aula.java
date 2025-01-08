@@ -3,9 +3,9 @@ package academia;
 import java.util.Scanner;
 
 /**
- * Classe para objetos do tipo Aula.
- * @author Marcus Vinícius Nunes Silva
- * @since 23-12-2024 at 11:13 AM
+ * Definicao de superclasse Aula, que servira para heranca de suas subclasses.
+ * @author Marcus Vinícius, Marcos Felipe, Dheniel Rodrigues, Kaua Luiz
+ * since 25/12/2024 at 14:08 PM
  */
 public class Aula {
     private String horarioInicio; // Horário da aula.
@@ -99,12 +99,13 @@ public class Aula {
     * Retorna uma representação textual do objeto Aula.
     * @return uma string com os detalhes da aula
     */
+    
     @Override
     public String toString() {
-        return "Informações da aula: " +
+        return super.toString() +"Informações da aula: " +
                 "Horário do início da aula: " + horarioInicio + "\n" +
                 "Horario do fim da aula: " + horarioFim + "\n";
-                //aqui puxar um toString de aluno, para concatenar essa barra
-                //Ex: "Info aluno: " + aluno.toString();    
     }
+    //aqui puxar um toString de aluno, para concatenar essa barra
+                //Ex: "Info aluno: " + aluno.toString();  
 }

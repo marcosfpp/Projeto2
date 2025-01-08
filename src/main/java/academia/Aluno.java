@@ -1,16 +1,16 @@
 package academia;
 
+/**
+ * Classe definida para tratar de usuarios cadastrados, alunos.
+ * @author Marcus Vinícius, Marcos Felipe, Dheniel Rodrigues, Kaua Luiz
+ * since 25/12/2024 at 14:08 PM
+ */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.util.Scanner;
 
-/**
- *
- * @author Dheniel
- * @since 19/12/2024 20:00 PM
- */
 public class Aluno {
 
     private int idAluno;
@@ -51,6 +51,13 @@ public class Aluno {
         return this.matricula;
     }
 
+    /**
+     * Insere um novo aluno no banco de dados.
+     * Os dados do aluno são inseridos na tabela 'aluno', incluindo o ID, nome, idade, email, matrícula e tipo de aula.
+     * 
+     * @throws SQLException Se houver um erro na execução.
+     */
+    
     public void inserirBanco() {
         Connection conexao = new Conexao().getConexao();
 
@@ -76,7 +83,19 @@ public class Aluno {
 
         }
     }
-
+    
+    
+    /**
+     * Altera os dados de um aluno existente no banco de dados.
+     * O nome, a idade e o email do aluno são atualizados com base no ID fornecido.
+     *
+     * @param novoNome O novo nome do aluno.
+     * @param novaIdade A nova idade do aluno.
+     * @param novoEmail O novo email do aluno.
+     * @param idAluno O ID do aluno cujos dados serão alterados.
+     * 
+     * @throws SQLException Se houver um erro na execução.
+     */
     
     public void alterarAluno(String novoNome, int novaIdade, String novoEmail, int idAluno) {
 
@@ -103,6 +122,13 @@ public class Aluno {
 
     }
 
+    /**
+     * Lista todos os alunos cadastrados no banco de dados.
+     * Exibe informações como ID, nome, idade, email, matrícula e tipo de aula de cada aluno.
+     * 
+     * @throws SQLException Se houver um erro na execução.
+     */
+    
     public void listarAlunos() {
         Connection conexao = new Conexao().getConexao();
 
@@ -134,7 +160,16 @@ public class Aluno {
 
         }
     }
-
+    
+    /**
+     * Exclui um aluno do banco de dados com base no ID fornecido.
+     * Também exclui os registros de pagamentos associados a esse aluno.
+     * 
+     * @param idAluno O ID do aluno que será excluído.
+     * 
+     * @throws SQLException Se houver um erro na execução.
+     */
+    
     public void excluirAluno(int idAluno) {
         Connection conexao = new Conexao().getConexao();
 

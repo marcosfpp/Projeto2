@@ -1,12 +1,23 @@
 package academia;
-
+/**
+ * Classe definida como academia com funções de APP.
+ * @author Marcus Vinícius, Marcos Felipe, Dheniel Rodrigues, Kaua Luiz
+ * since 25/12/2024 at 14:08 PM
+ */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class Academia {
-
+    /**
+     * Estabelecimento de funcoes de verificacao, validacao e definicao.
+     * Neste caso, verificação de ID existente
+     * @param idProcurado
+     * @return Retorno de verdadeiro se o ID for verificado com sucesso e falso se falhar
+     */
     public static boolean verificarId(int idProcurado) {
         Connection conexao = new Conexao().getConexao();
         String sql = "SELECT COUNT(*) FROM aluno WHERE id = ?";
@@ -30,6 +41,12 @@ public class Academia {
         return existe;
     }
 
+        /**
+     * Estabelecimento de funcao de validacao da matricula 
+     * @param matricula Parametro usado para confirmar a matricula
+     * @param idAluno Parametro usado para identificacao do aluno
+     * 
+     */
     public static void validarMatricula(String matricula, int idAluno) {
         Connection conexao = new Conexao().getConexao();
         String sql = "UPDATE aluno SET matricula = ? WHERE id = ?";
@@ -49,6 +66,12 @@ public class Academia {
         }
     }
     
+    /**
+     * Estabelecimento de funcao de definicao de aula, após escolha do usuario.
+     * @param tipoAula Parametro usado para diferenciacao dos tipos de aula
+     * @param idAluno Parametro usado para identificacao do aluno
+     * 
+     */
     public static void definirAula(String tipoAula, int idAluno) {
         Connection conexao = new Conexao().getConexao();
         String sql = "UPDATE aluno SET tipo_aula = ? WHERE id = ?";
@@ -70,6 +93,12 @@ public class Academia {
         }
     }
     
+     /**
+     * Estabelecimento de funcao de verificacao de matricula existente, aluno ja cadastrado.
+     * @param idAluno Parametro usado para identifcacao do aluno
+     * @return Retornara verdadeiro caso a matricula do aluno esta ativa e falso caso o contrario.
+     * 
+     */
     public static boolean verificarMatriculaAtiva(int idAluno){
         Connection conexao = new Conexao().getConexao();
        
@@ -97,6 +126,13 @@ public class Academia {
         return matriculaAtiva;
     }
     
+     /**
+     * Estabelecimento de funcao de verificacao de aula, para pesquisa em qual tipo
+     * o aluno esta matriculado
+     * @param idAluno Parametro para identifcacao do aluno
+     * @return Retornara posiivo se caso o aluno estiver inscrito na aula e falso caso o contrario.
+     * 
+     */
     public static boolean verificarAula(int idAluno){
         Connection conexao = new Conexao().getConexao();
        
@@ -123,16 +159,21 @@ public class Academia {
         }
         return aulaInscrita;
     }
-    
+    /**
+     * Método principal que exibe o menu de opções e executa ações conforme a escolha do usuário.
+     *
+     */
     public static void main(String[] args) {
-        int opcMenu = 0;
-        int posAlunos = 0;
-        int posPag = 0;
-        Aluno[] alunos = new Aluno[50];
-        Pagamentos[] pagamentos = new Pagamentos[50];
-        Scanner scan = new Scanner(System.in);
+        int opcMenu = 0; // Variável que armazena a opção escolhida pelo usuário no menu
+        int posAlunos = 0; // Posição de cadastro de alunos
+        int posPag = 0; // Posição de cadastro de pagamentos
+        String opc_sec = "";
+        Aluno[] alunos = new Aluno[50]; // Array para armazenar os alunos
+        Pagamentos[] pagamentos = new Pagamentos[50]; // Array para armazenar os pagamentos
+        Scanner scan = new Scanner(System.in); // Scanner para ler as entradas do usuário
 
         do {
+            // Exibição do menu de opções
             System.out.println("\n1 - Cadastro aluno");
             System.out.println("2 - Realizar pagamento de mensalidade");
             System.out.println("3 - Alterar cadastro de aluno");
@@ -147,11 +188,14 @@ public class Academia {
             opcMenu = scan.nextInt();
             scan.nextLine();
 
+             // Processamento conforme a opção escolhida
             switch (opcMenu) {
                 case 1:
+                    // Cadastro de aluno
                     try {
                         System.out.println("\nCADASTRO DE ALUNOS\n");
 
+                        // Conta a quantidade de alunos cadastrados
                         for (int i = 0; i < alunos.length; i++) {
                             if (alunos[i] != null) {
                                 posAlunos++;
@@ -168,9 +212,9 @@ public class Academia {
                         System.out.print("\nDigite o email do aluno: ");
                         String email = scan.nextLine();
 
-                        Aluno infoAlunos = new Aluno(nome, idade, email);
-                        alunos[posAlunos] = infoAlunos;
-                        alunos[posAlunos].inserirBanco();
+                        Aluno infoAlunos = new Aluno(nome, idade, email); // Criação de um novo objeto Aluno
+                        alunos[posAlunos] = infoAlunos; // Armazena o aluno na posição disponível
+                        alunos[posAlunos].inserirBanco(); // Salva no banco de dados
                         scan.nextLine();
 
                     } catch (Exception e) {
@@ -178,6 +222,7 @@ public class Academia {
                     }
                     break;
                 case 2:
+                    // Realização de pagamento
                     try {
                         System.out.println("\nPAGAMENTO DE MENSALIDADE\n");
                         System.out.println("VALOR = R$50,00");
@@ -186,9 +231,11 @@ public class Academia {
                         int idBusca = scan.nextInt();
                         scan.nextLine();
 
+                        // Verifica se o ID do aluno existe
                         boolean existe = verificarId(idBusca);
 
                         if (existe) {
+                            // Conta a quantidade de pagamentos realizados
                             for (int i = 0; i < pagamentos.length; i++) {
                                 if (pagamentos[i] != null) {
                                     posPag++;
@@ -202,9 +249,10 @@ public class Academia {
                             String formaPagamento = scan.nextLine();
 
                             Pagamentos infoPagamentos = new Pagamentos(dataAtual, formaPagamento, idBusca);
-                            pagamentos[posPag] = infoPagamentos;
-                            pagamentos[posPag].inserirBanco();
+                            pagamentos[posPag] = infoPagamentos; // Armazena o pagamento
+                            pagamentos[posPag].inserirBanco(); // Salva o pagamento no banco
                             
+                            // Valida matrícula após pagamento
                             validarMatricula("Ativa", idBusca);
                         } else {
                             System.out.println("O ID " + idBusca + " nao foi encontrado!");
@@ -214,6 +262,7 @@ public class Academia {
                     }
                     break;
                 case 3:
+                    // Alteração de cadastro de aluno
                     try{    
                         System.out.println("\nALTERACAO CADASTRO DE ALUNO\n");
                         
@@ -245,6 +294,7 @@ public class Academia {
                     }
                     break;
                 case 4:
+                    // Exclusão de cadastro de aluno
                     try{
                         System.out.println("\nEXCLUIR CADASTRO DE ALUNOS\n");
                         
@@ -266,13 +316,16 @@ public class Academia {
                     }
                     break;
                 case 5:
+                    // Matrícula em aula
                     try{
                         System.out.print("\nMATRICULAR EM AULA\n");
                         System.out.println("Veja as informacoes das aulas a seguir: ");
                         
+                        // Exemplo de aulas disponíveis
                         Musculacao infoMusc = new Musculacao("15:00h","17:00h","Marcos Felipe");
                         Crossfit infoCross = new Crossfit("9:00h","11:00h","Marcus Vinicius");
                         
+                        // Exibe informações sobre as aulas
                         infoMusc.toString();
                         System.out.println("\n");
                         infoCross.toString();
@@ -321,19 +374,52 @@ public class Academia {
                     }
                     break;
                 case 6:
+                    // Listar alunos
                     Aluno aluno = new Aluno();
                     aluno.listarAlunos();
                     scan.nextLine();
                     break;
                 case 7:
+                    // Listar pagamentos
                     Pagamentos pagamento = new Pagamentos();
                     pagamento.listaPagamentos();
                     scan.nextLine();
                         scan.nextLine();
                     break;
                 case 8:
+                    // Exportação de relatórios (não implementado)
+                    System.out.print("\nEXPORTAR DADOS\n");
+                    try{
+                        System.out.println("Deseja exportar os dados?, digite S ou N");
+                        opc_sec = scan.nextLine();
+                        System.out.println("\n");
+                        
+                        if ("S".equals(opc_sec) || "s".equals(opc_sec) || "Sim".equals(opc_sec) || "sim".equals(opc_sec)){
+                            FileWriter arquivo = new FileWriter("dados_exportados.txt", true);
+                            PrintWriter gravaArquivo = new PrintWriter(arquivo);
+
+                            //gravação de alunos
+                            for(int i = 0; i < alunos.length; i++){
+                                if (alunos[i] != null){
+                                    gravaArquivo.println(alunos[i]);
+                                }
+                            }
+                            //gravação de pagamentos
+                            for(int j = 0; j < pagamentos.length; j++){
+                                if (pagamentos[j] != null){
+                                    gravaArquivo.println(pagamentos[j]);
+                                }
+                            }
+
+                            gravaArquivo.close();
+                            arquivo.close();
+                        }
+                    }catch(Exception e){
+                        System.out.println("Erro ao exportar os dados!");
+                    }
                     break;
                 case 9:
+                    // Mensagem de despedida
                     System.out.println("\nObrigado pela preferencia!");
                     scan.nextLine();
                     break;

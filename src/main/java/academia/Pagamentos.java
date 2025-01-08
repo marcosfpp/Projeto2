@@ -1,5 +1,10 @@
 package academia;
 
+/**
+ * Classe definida para tratamento de funcoes relacionadas ao pagamento de mensalidade.
+ * @author Marcus Vinícius, Marcos Felipe, Dheniel Rodrigues, Kaua Luiz
+ * since 25/12/2024 at 14:08 PM
+ */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -99,13 +104,8 @@ public class Pagamentos {
     }
 
     //Método para exibir os detalhes do pagamento 
-    @Override
-    public String toString() {
-        return "Pagamentos{"
-                + "idPagamento=" + idPagamento
-                + ", dataPagamento='" + dataPagamento + '\''
-                + ", formaPagamento='" + formaPagamento + '\''
-                + '}';
-    }
-
+    
+    
+    
+    
 }
