@@ -174,7 +174,7 @@ public class Academia {
                         scan.nextLine();
 
                     } catch (Exception e) {
-                        System.out.println("\nErro ao tentar cadastrar aluno!" + e.getMessage());
+                        System.out.println("\nErro ao tentar cadastrar aluno: " + e.getMessage());
                     }
                     break;
                 case 2:
@@ -204,16 +204,13 @@ public class Academia {
                             Pagamentos infoPagamentos = new Pagamentos(dataAtual, formaPagamento, idBusca);
                             pagamentos[posPag] = infoPagamentos;
                             pagamentos[posPag].inserirBanco();
-                            //if(formaPagamento != null){
-                            //Aluno.setMatriculaAtiva(true);
-                            //}
                             
                             validarMatricula("Ativa", idBusca);
                         } else {
                             System.out.println("O ID " + idBusca + " nao foi encontrado!");
                         }
                     } catch (Exception e) {
-                        System.out.println("Erro ao realizar pagamento" + e.getMessage());
+                        System.out.println("Erro ao realizar pagamento: " + e.getMessage());
                     }
                     break;
                 case 3:
@@ -244,7 +241,7 @@ public class Academia {
                             System.out.println("O ID " + idBusca + " nao foi encontrado!");
                         }
                     }catch(Exception e){
-                        System.out.println("Erro a alterar cadastro de aluno! " + e.getMessage());
+                        System.out.println("Erro a alterar cadastro de aluno: " + e.getMessage());
                     }
                     break;
                 case 4:
@@ -265,7 +262,7 @@ public class Academia {
                             System.out.println("O ID " + " nao foi encontrado!");
                         }
                     }catch(Exception e){
-                        System.out.println("Erro ao excluir aluno! " + e.getMessage());
+                        System.out.println("Erro ao excluir aluno: " + e.getMessage());
                     }
                     break;
                 case 5:
@@ -320,7 +317,7 @@ public class Academia {
                             System.out.println("O ID " + " nao foi encontrado!");
                         }
                     }catch(Exception e){
-                        System.out.println("Erro ao matricular em aula! " + e.getMessage());
+                        System.out.println("Erro ao matricular em aula: " + e.getMessage());
                     }
                     break;
                 case 6:
