@@ -36,5 +36,11 @@ public class Crossfit extends Aula {
     * Retorna uma representação textual do objeto Crossfit.
     * @return uma string com os detalhes da aula
     */
-
+    @Override
+       public String toString() {
+       return "Crossfit: " +
+              "Horário de Início: " + getHorarioInicioAula() + ", " +
+              "Horário de Fim: " + getHorarioFimAula() + ", " +
+              "Instrutor: " + getInstrutor();
+       }
 }

@@ -1,0 +1,21 @@
+ID	Nome
+Idade
+Email	Matricula	Aula
+===============================================================================
+3	dhenield	19	dheniel@hotmail.com	Ativa	Crossfit
+4	pepe	22	pepe@gmail.com	Ativa	Musculacao
+5	markin	19	markin@gmail.com	Ativa	Musculacao
+10	sandro	15	sandro@gmail.com	Ativa	Crossfit
+11	sandriel	15	sandrieç@gmail.com	Ativa	Musculacao
+12	lucas	14	lucas@gmail.com	Ativa	Musculacao
+
+ID	Data
+Forma
+Aluno
+===============================================================================
+5	07/03/2006	pix	3
+6	13/03/2002	cartao	4
+7	22/10/2024	pix	3
+8	01/01/2025	cartao	5
+12	07/01/2025	pix	11
+13	07/01/2025	pix	12

@@ -40,7 +40,55 @@ public class Academia {
         }
         return existe;
     }
+    /**
+     * Método para exportar dados dos sistema
+     * @param nomeArquivo nome do arquivo txt para exportar os dados
+     * @return Retorna um arquivo com todos os dados do banco de dados
+     */
+    public static void exportarDados(String nomeArquivo){
+        Connection conexao = new Conexao().getConexao();
+        
+        String sqlAluno = "SELECT * FROM aluno";
+        String sqlPag = "SELECT * FROM pagamentos";
+        
+        try(FileWriter fw = new FileWriter(nomeArquivo);
+            PrintWriter pw = new PrintWriter(fw);
+            PreparedStatement comandoAluno = conexao.prepareStatement(sqlAluno);
+            PreparedStatement comandoPagamentos = conexao.prepareStatement(sqlPag);
+            ResultSet resultadoAluno = comandoAluno.executeQuery();
+            ResultSet resultadoPag = comandoPagamentos.executeQuery();){
+            
+            pw.println("ID\tNome\nIdade\nEmail\tMatricula\tAula");
+            pw.println("===============================================================================");
+            
+            while(resultadoAluno.next()){
+                int id = resultadoAluno.getInt("id");
+                String nome = resultadoAluno.getString("nome");
+                int idade = resultadoAluno.getInt("idade");
+                String email = resultadoAluno.getString("email");
+                String matricula = resultadoAluno.getString("matricula");
+                String aula = resultadoAluno.getString("tipo_aula");
 
+                pw.printf("%d\t%s\t%d\t%s\t%s\t%s%n", id, nome, idade, email, matricula, aula);
+            }
+            
+            pw.println("\nID\tData\nForma\nAluno");
+            pw.println("===============================================================================");
+            
+            while(resultadoPag.next()){
+                int id = resultadoPag.getInt("id");
+                String data = resultadoPag.getString("dataPag");
+                String formaPag = resultadoPag.getString("formaPag");
+                int idAluno = resultadoPag.getInt("id_aluno");
+                
+                pw.printf("%d\t%s\t%s\t%d%n", id, data, formaPag, idAluno);
+            }
+            
+            System.out.println("Arquivos exportados com sucesso!");
+        }catch(Exception e){
+            System.out.println("Erro ao exportar arquivos: " + e.getMessage());
+        }
+    }
         /**
      * Estabelecimento de funcao de validacao da matricula 
      * @param matricula Parametro usado para confirmar a matricula
@@ -326,9 +374,8 @@ public class Academia {
                         Crossfit infoCross = new Crossfit("9:00h","11:00h","Marcus Vinicius");
                         
                         // Exibe informações sobre as aulas
-                        infoMusc.toString();
-                        System.out.println("\n");
-                        infoCross.toString();
+                        System.out.println(infoMusc.toString());
+                        System.out.println(infoCross.toString());
                         
                         System.out.println("1 - Crossfit");
                         System.out.println("2 - Musculacao");
@@ -395,27 +442,11 @@ public class Academia {
                         System.out.println("\n");
                         
                         if ("S".equals(opc_sec) || "s".equals(opc_sec) || "Sim".equals(opc_sec) || "sim".equals(opc_sec)){
-                            FileWriter arquivo = new FileWriter("dados_exportados.txt", true);
-                            PrintWriter gravaArquivo = new PrintWriter(arquivo);
-
-                            //gravação de alunos
-                            for(int i = 0; i < alunos.length; i++){
-                                if (alunos[i] != null){
-                                    gravaArquivo.println(alunos[i]);
-                                }
-                            }
-                            //gravação de pagamentos
-                            for(int j = 0; j < pagamentos.length; j++){
-                                if (pagamentos[j] != null){
-                                    gravaArquivo.println(pagamentos[j]);
-                                }
-                            }
-
-                            gravaArquivo.close();
-                            arquivo.close();
+                            exportarDados("dados_exportados.txt");
+                            scan.nextLine();
                         }
                     }catch(Exception e){
-                        System.out.println("Erro ao exportar os dados!");
+                        System.out.println("Erro ao exportar os dados!" + e.getMessage());
                     }
                     break;
                 case 9:

@@ -35,5 +35,12 @@ public class Musculacao extends Aula {
     * Retorna uma representação textual do objeto Musculação.
     * @return uma string com os detalhes da aula
     */
-   
+    @Override
+    public String toString() {
+    return "Musculação: " +
+           "Horário de Início: " + getHorarioInicioAula() + ", " +
+           "Horário de Fim: " + getHorarioFimAula() + ", " +
+           "Instrutor: " + getInstrutor();
+    }
+
 }
